@@ -289,6 +289,20 @@ public class RGBColor implements Color {
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof RGBColor)) {
+			return false;
+		}
+
+		RGBColor colorObj = (RGBColor) obj;
+
+		return (this.getRed() == colorObj.getRed()
+				&& this.getBlue() == colorObj.getBlue()
+				&& this.getGreen() == colorObj.getGreen());
+	}
+
+
+	@Override
 	public String toString() {
 		return String.format("RGB(%d, %d, %d)\n",
 				this.getRed(),
