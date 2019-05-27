@@ -299,6 +299,18 @@ public class HSLColor implements Color {
 		
 		return (int) returnColor;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof HSLColor)) {
+			return false;
+		}
+		HSLColor colorObj = (HSLColor) obj;
+
+		return (this.getHue() == colorObj.getHue()
+		&& this.getSaturation() == colorObj.getSaturation()
+		&& this.getLightness() == colorObj.getLightness());
+	}
 	
 	/**
 	 * Overridden toString() method from Color class.
