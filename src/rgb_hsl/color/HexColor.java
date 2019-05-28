@@ -1,5 +1,9 @@
 package rgb_hsl.color;
 
+import jdk.internal.util.xml.impl.Input;
+
+import java.util.InputMismatchException;
+
 /**
  * Subclass of abstract class RGBColor.
  * Uses integer values for red, blue and green
@@ -13,6 +17,114 @@ package rgb_hsl.color;
  */
 public class HexColor extends RGBColor {
 	private String hexCode;
+
+	/**
+	 * Inner class designed to parse Hex Strings.
+	 * @author Noah Teshima
+	 */
+	private static class HexParser {
+		/**
+		 * Regular expression pattern used to determine
+		 * if a String is a valid hex color code. In general, a
+		 * String is a valid hex color code iff it follows any of
+		 * the following forms:
+		 * #rgb, rgb, #rrggbb, rrggbb
+		 * for r,g,b represent arbitrary digits or letters a-f.
+		 */
+		private static String PATTERN_ONE = "^[\\s]*[#]?([\\da-fA-F]{3}|[\\da-fA-F]{6})[\\s]*$";
+
+		/**
+		 * Helper method used to remove unnecessary characters from the
+		 * given hex code.
+		 * @param hexString String reference containing the hex color code.
+		 * @return String object containing the hex color code with unnecessary
+		 * characters removed.
+		 * @precondition hexString is a valid hex color code.
+		 */
+		private String strip(String hexString) {
+			hexString = hexString.replaceAll("\\s", "").toLowerCase();
+			return (hexString.indexOf("#") != -1) ? hexString.substring(1) : hexString;
+		}
+
+		/**
+		 * Accessor method used to determine whether the given String
+		 * is a parseable hex color code.
+		 * @param str String reference containing a potential hex color
+		 *            code.
+		 * @return boolean value determining whether the given reference is
+		 * in a parseable format for a hex color code.
+		 */
+		public boolean isParseable(String str) {
+			return str.matches(PATTERN_ONE);
+		}
+
+		/**
+		 * Accessor method used to get the amount of red
+		 * in the given hex color code in base ten.
+		 * @param hexString String reference containing the hex color code.
+		 * @return int value containing the amount of red in base ten.
+		 */
+		public int getRedBaseTen(String hexString) throws InputMismatchException {
+			if(!this.isParseable(hexString)) {
+				throw new InputMismatchException();
+			}
+
+			return this.getBaseTen(this.getRed(hexString));
+		}
+
+		/**
+		 * Accessor method used to get the hex code for the
+		 * amount of red.
+		 * @param hexString String reference containing the hex color code.
+		 * @return int value containing the amount of red in base 16.
+		 * @precondition hexString is a valid hex color code.
+		 */
+		private String getRed(String hexString) {
+			String strippedString = this.strip(hexString);
+			return (strippedString.length() == 6) ? strippedString.substring(0, 2) : strippedString.substring(0, 1);
+		}
+
+		/**
+		 * Accessor method used to get the hex code for the
+		 * amount of green.
+		 * @param hexString String reference containing the hex color code.
+		 * @return String value containing the amount of green in base 16.
+		 * @precondition hexString is a valid hex color code.
+		 */
+		private String getGreen(String hexString) {
+			String strippedString = this.strip(hexString);
+			return (strippedString.length() == 6) ? strippedString.substring(2, 4) : strippedString.substring(1, 2);
+		}
+
+		/**
+		 * Accessor method used to get the hex code for the
+		 * amount of blue.
+		 * @param hexString String reference containing the hex color code.
+		 * @return String value containing the amount of blue in base 16.
+		 * @precondition hexString is a valid hex color code.
+		 */
+		private String getBlue(String hexString) {
+			String strippedString = this.strip(hexString);
+			return (strippedString.length() == 6) ? strippedString.substring(4) : strippedString.substring(2);
+		}
+
+		/**
+		 * Accessor method used to get the base ten counterpart
+		 * of the given String
+		 * @param baseSixteen String reference containing a valid
+		 *                    base sixteen String.
+		 * @return int value containing the given reference's base ten
+		 * equivalent.
+		 * @precondition baseSixteen is a hex code stripped of unnecessary components.
+		 */
+		private int getBaseTen(String baseSixteen) {
+			// one liners ftw lmaooo
+			return (baseSixteen.length() > 0)
+					? ("0123456789abcdef".indexOf(baseSixteen.charAt(0) * (int) Math.pow(16, baseSixteen.length() - 1)))
+					+ this.getBaseTen(baseSixteen.substring(1))
+					: 0;
+		}
+	}
 	
 	/**
 	 * Default constructor. When invoked, a default
@@ -83,6 +195,16 @@ public class HexColor extends RGBColor {
 	 */
 	public String getHexCode() {
 		return this.hexCode;
+	}
+
+	/**
+	 * Mutator method designed to set the current HexColor instance
+	 * with a hex String.
+	 * @param hexCode String reference containing a valid hexCode.
+	 * @throws InputMismatchException If the given hex String is not parseable.
+	 */
+	public void setColor(String hexCode) throws InputMismatchException {
+
 	}
 
 	@Override
