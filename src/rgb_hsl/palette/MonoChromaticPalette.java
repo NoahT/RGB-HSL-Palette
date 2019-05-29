@@ -12,6 +12,7 @@ import rgb_hsl.color.HSLColor;
  *
  */
 public class MonoChromaticPalette extends Palette {
+	private static final int DEFAULT_AMOUNT = 1;
 	private int amount;
 
 	/**
@@ -22,7 +23,7 @@ public class MonoChromaticPalette extends Palette {
 	 * color palette
 	 */
 	public MonoChromaticPalette(Color color) {
-		this(color, 5);
+		this(color, DEFAULT_AMOUNT);
 	}
 
 	/**
