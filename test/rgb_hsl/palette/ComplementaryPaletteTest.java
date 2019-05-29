@@ -22,14 +22,26 @@ public class ComplementaryPaletteTest {
      * Array containing coordinates in RGB space
      * with which a complementary palette is created.
      */
-    private int[][] RGB_INPUTS = {{0, 0, 0}, {255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {120, 0, 40},
-            {60, 120, 180}, {40, 100, 150}};
+    private int[][] RGB_INPUTS = {
+            {0, 0, 0},
+            {255, 0, 0},
+            {0, 255, 0},
+            {0, 0, 255},
+            {120, 0, 40},
+            {60, 120, 180},
+            {40, 100, 150}};
 
     /**
-     * 2D array containing the results of creating complementary palettes
+     * 3D array containing the results of creating complementary palettes
      */
-    private int[][] RGB_RESULTS = {{0, 0, 0}, {0, 255, 255}, {255, 0, 255}, {255, 255, 0}, {0 , 120, 80},
-            {180, 120, 60}, {150, 90, 40}};
+    private int[][][] RGB_RESULTS = {
+            {{0, 0, 0}, {0, 0, 0}},
+            {{255, 0, 0}, {0, 255, 255}},
+            {{0, 255, 0}, {255, 0, 255}},
+            {{0, 0, 255}, {255, 255, 0}},
+            {{120, 0, 40}, {0 , 120, 80}},
+            {{60, 120, 180}, {180, 120, 60}},
+            {{40, 100, 150}, {150, 90, 40}}};
 
     @Before
     public void init() {
@@ -46,15 +58,14 @@ public class ComplementaryPaletteTest {
         int[] compCoords;
         for(int index = 0; index < RGB_INPUTS.length; index++) {
             coords = RGB_INPUTS[index];
-            compCoords = RGB_RESULTS[index];
+
             this.paletteOne = new ComplementaryPalette(new RGBColor(coords[0], coords[1], coords[2]));
 
-            for(Color color : this.paletteOne.getColors()) {
-                if(color.equals(this.paletteOne.getStartingColor())) {
-                    continue;
-                }
-                complementary = Color.getRGBColor(color);
-                err = String.format("Complementary color %s was given instead of %s!\n",
+            for(int index2 = 0; index2 < this.paletteOne.getColors().size(); index2++) {
+                complementary = Color.getRGBColor(this.paletteOne.getColor(index2));
+                compCoords = RGB_RESULTS[index][index2];
+
+                err = String.format("Monochromatic color %s was given instead of %s!\n",
                         complementary, Arrays.toString(compCoords));
                 assertEquals(err, compCoords[0], complementary.getRed(), 2);
                 assertEquals(err, compCoords[1], complementary.getGreen(), 2);
