@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Abstract superclass used as a base class for
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  *
  */
 public abstract class Palette {
-	private ArrayList<Color> colors;
+	private List<Color> colors;
 	private Color startingColor;
 
 	/**
@@ -73,11 +74,11 @@ public abstract class Palette {
 	 * Accessor method used to get a shallow
 	 * copy of all the colors in the current
 	 * palette.
-	 * @return ArrayList of basetype Color
+	 * @return List of basetype Color
 	 * containing all of the colors in the
 	 * current palette.
 	 */
-	public ArrayList<Color> getColors() {
+	public List<Color> getColors() {
 		return this.colors;
 	}
 
