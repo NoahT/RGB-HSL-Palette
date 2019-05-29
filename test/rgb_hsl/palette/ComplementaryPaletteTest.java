@@ -3,7 +3,6 @@ package rgb_hsl.palette;
 import org.junit.Before;
 import org.junit.Test;
 import rgb_hsl.color.Color;
-import rgb_hsl.color.HSLColor;
 import rgb_hsl.color.RGBColor;
 
 import java.util.Arrays;
@@ -37,7 +36,7 @@ public class ComplementaryPaletteTest {
     }
 
     /**
-     * Unit test designed to test the default constructor.
+     * Unit test designed to test the generation of complementary palettes..
      */
     @Test
     public void testComplementaryPalettes() {
