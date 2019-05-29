@@ -1,12 +1,12 @@
 package rgb_hsl.color;
 
 /**
- * Implementation of Color interface.
+ * Subclass of Color.
  * Uses integer values for red, blue and green
  * and compensates for any remainder.
  * @author Noah Teshima
  */
-public class RGBColor implements Color {
+public class RGBColor extends Color {
 	private int red,
 	green,
 	blue;

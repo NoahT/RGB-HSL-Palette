@@ -1,13 +1,13 @@
 package rgb_hsl.color;
 
 /**
- * Implementation of the Color interface.
+ * Subclass of Color.
  * Used for describing a color by hue, saturation,
  * and lightness.
  * @author Noah Teshima
  *
  */
-public class HSLColor implements Color {
+public class HSLColor extends Color {
 	private int hue;
 	private double saturation,
 	lightness;
