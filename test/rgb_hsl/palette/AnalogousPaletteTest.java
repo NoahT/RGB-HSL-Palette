@@ -8,6 +8,7 @@ import rgb_hsl.color.RGBColor;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -21,25 +22,71 @@ public class AnalogousPaletteTest {
     /**
      * Array containing coordinates in RGB space
      * with which an analogous palette is created.
-     * For the purpose of these tests, the offset of
-     * analogous colors is a maximal 120 degrees.
      */
     private int[][] RGB_INPUTS = {
             {0, 0, 0},
             {255, 0, 0},
-            {120, 0, 40},
-            {60, 120, 180},
-            {40, 100, 150}};
+            {0, 255, 0},
+            {0, 0, 255},
+            {120, 120, 0},
+            {120, 0, 120},
+            {0, 120, 120}
+    };
 
     /**
-     * 3D array containing the results of analogous palettes
+     * 3D array containing the results of analogous palettes, with
+     * offset adjusted to 0 degrees.
      */
-    private int[][][] RGB_RESULTS = {
+    private int[][][] RGB_RESULTS_ZERO = {
             {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
-            {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}},
-            {{120, 0, 40}, {41, 122, 0}, {0, 41, 122}},
-            {{60, 120, 180}, {180, 60, 120}, {120, 180, 60}},
-            {{40, 100, 150}, {149, 40, 100}, {100, 149, 40}}
+            {{255, 0, 0}, {255, 0, 0}, {255, 0, 0}},
+            {{0, 255, 0}, {0, 255, 0}, {0, 255, 0}},
+            {{0, 0, 255}, {0, 0, 255}, {0, 0, 255}},
+            {{120, 120, 0}, {120, 120, 0}, {120, 120, 0}},
+            {{120, 0, 120}, {120, 0, 120}, {120, 0, 120}},
+            {{0, 120, 120}, {0, 120, 120}, {0, 120, 120}}
+    };
+
+    /**
+     * 3D array containing the results of analogous palettes, with
+     * offset adjusted to 30 degrees.
+     */
+    private int[][][] RGB_RESULTS_THIRTY = {
+            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+            {{255, 0, 0}, {255, 128, 0}, {255, 0, 128}},
+            {{0, 255, 0}, {0, 255, 128}, {128, 255, 0}},
+            {{0, 0, 255}, {127, 0, 255}, {0, 127, 255}},
+            {{120, 120, 0}, {61, 122, 0}, {122, 61, 0}},
+            {{120, 0, 120}, {122, 0, 61}, {61, 0, 122}},
+            {{0, 120, 120}, {0, 61, 122}, {0, 122, 61}}
+    };
+
+    /**
+     * 3D array containing the results of analogous palettes, with
+     * offset adjusted to 60 degrees.
+     */
+    private int[][][] RGB_RESULTS_SIXTY = {
+            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+            {{255, 0, 0}, {255, 255, 0}, {255, 0, 255}},
+            {{0, 255, 0}, {0, 255, 255}, {255, 255, 0}},
+            {{0, 0, 255}, {255, 0, 255}, {0, 255, 255}},
+            {{120, 120, 0}, {0, 122, 0}, {122, 0, 0}},
+            {{120, 0, 120}, {122, 0, 0}, {0, 0, 122}},
+            {{0, 120, 120}, {0, 0, 122}, {0, 122, 0}}
+    };
+
+    /**
+     * 3D array containing the results of analogous palettes, with
+     * offset adjusted to 90 degrees.
+     */
+    private int[][][] RGB_RESULTS_NINETY = {
+            {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}},
+            {{255, 0, 0}, {128, 255, 0}, {127, 0, 255}},
+            {{0, 255, 0}, {0, 127, 255}, {255, 128, 0}},
+            {{0, 0, 255}, {255, 0, 128}, {0, 255, 128}},
+            {{120, 120, 0}, {0, 122, 61}, {122, 0, 61}},
+            {{120, 0, 120}, {122, 61, 0}, {0, 61, 122}},
+            {{0, 120, 120}, {61, 0, 122}, {61, 122, 0}}
     };
 
     @Before
@@ -47,11 +94,47 @@ public class AnalogousPaletteTest {
     }
 
     /**
-     * Unit test designed to test the generation of analogous palettes. For the purpose of this
-     * test, offset of each color generated is a maximal 120 degrees.
+     * Unit test designed to test the generation of analogous palettes with an offset
+     * of zero degrees.
      */
     @Test
-    public void testAnalogousPalettes() {
+    public void testAnalogousPalettesZero() {
+        this.runAnalogousPalette(RGB_RESULTS_ZERO, 0);
+    }
+
+    /**
+     * Unit test designed to test the generation of analogous palettes with an offset
+     * of thirty degrees.
+     */
+    @Test
+    public void testAnalogousPalettesThirty() {
+        this.runAnalogousPalette(RGB_RESULTS_THIRTY, 30);
+    }
+
+    /**
+     * Unit test designed to test the generation of analogous palettes with an offset
+     * of sixty degrees.
+     */
+    @Test
+    public void testAnalogousPalettesSixty() {
+        this.runAnalogousPalette(RGB_RESULTS_SIXTY, 60);
+    }
+
+    /**
+     * Unit test designed to test the generation of analogous palettes with an offset
+     * of ninety degrees.
+     */
+    @Test
+    public void testAnalogousPalettesNinety() {
+        this.runAnalogousPalette(RGB_RESULTS_NINETY, 90);
+    }
+
+    /**
+     * Helper method used to test analogous palettes.
+     * @param RGB_RESULTS 3D array containing expected output values
+     * @param offset int value containing the offset in degrees
+     */
+    private void runAnalogousPalette(int[][][] RGB_RESULTS, int offset) {
         RGBColor analogous;
         String err;
         int[] coords;
@@ -59,7 +142,7 @@ public class AnalogousPaletteTest {
         for(int index = 0; index < RGB_INPUTS.length; index++) {
             coords = RGB_INPUTS[index];
 
-            this.paletteOne = new AnalogousPalette(new RGBColor(coords[0], coords[1], coords[2]), 120);
+            this.paletteOne = new AnalogousPalette(new RGBColor(coords[0], coords[1], coords[2]), offset);
 
             for(int index2 = 0; index2 < this.paletteOne.getColors().size(); index2++) {
                 analogous = Color.getRGBColor(this.paletteOne.getColor(index2));
