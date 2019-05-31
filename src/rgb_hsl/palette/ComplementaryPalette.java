@@ -4,7 +4,7 @@ import rgb_hsl.color.Color;
 import rgb_hsl.color.HSLColor;
 
 /**
- * Palette sublass used to generate a complementary
+ * Palette subclass used to generate a complementary
  * color palette. A complementary color
  * palette takes any color and generates another
  * color with an opposite hue.
@@ -23,10 +23,9 @@ public class ComplementaryPalette extends Palette {
 	}
 
 	/**
-	 * Constructor used to create a complementary palette
-	 * based off the given Color reference. When invoked,
-	 * the instance's list of colors is instantiated and
-	 * adds the given color.
+	 * Create a complementary palette based off the given
+	 * Color reference. When invoked, the instance's list
+	 * of colors is instantiated and adds the given color.
 	 * @param color Color reference used to create a new
 	 * color palette
 	 */
@@ -36,9 +35,13 @@ public class ComplementaryPalette extends Palette {
 	}
 
 	/**
-	 * Private accessor method designed to get a
-	 * Color object with the opposite hue of the
-	 * starting color.
+	 * Get a Color object with the opposite hue of the
+	 * starting color. Opposite hue is given as the maximal
+	 * distance in HSL space between the starting color and
+	 * any color with the same saturation and lightness. In
+	 * other words, the complementary color is given by the color
+	 * with a difference of 180 degrees in hue, while retaining
+	 * the same saturation and lightness.
 	 * @return Color object containing the complementary
 	 * Color of the starting color
 	 */

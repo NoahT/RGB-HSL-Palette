@@ -11,9 +11,14 @@ import java.util.List;
 
 /**
  * Abstract superclass used as a base class for
- * creating different types of Palettes.
+ * creating different types of Palettes. Palettes
+ * are based on abstractions in color theory. More
+ * information can be found here:
+ * <a href="https://en.wikipedia.org/wiki/Color_theory" target="_blank">
+ *     https://en.wikipedia.org/wiki/Color_theory
+ * </a>
  * @author Noah Teshima
- *
+ * @since 1.0.0
  */
 public abstract class Palette {
 	private List<Color> colors;
@@ -30,9 +35,8 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Default constructor. When invoked, the
-	 * instance's ArrayList containing Colors
-	 * is instantiated.
+	 * Create a color palette with respect to the
+	 * given Color reference.
 	 * @param color Color reference containing the
 	 *              color with respect to which the
 	 *              palette should generate.
@@ -44,18 +48,19 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Method stub designed to generate any color
-	 * palette given the starting color and any other
-	 * necessary information.
+	 * Generate any color palette given the starting
+	 * color. If no starting color is specified, the
+	 * starting color is given as the ordered triplet
+	 * (0, 0, 0) in HSL space.
 	 */
 	protected abstract void generate();
 
 	/**
-	 * File output method designed to write the
-	 * given colors out to the specified file in HSL space.
+	 * Write the given colors out to the specified file in
+	 * HSL space.
 	 * @param file String reference containing
-	 * the name of the file to write to. If the
-	 * file already exists, it will be overwritten.
+	 *                the name of the file to write to. If the
+	 *                file already exists, it will be overwritten.
 	 * @throws FileNotFoundException if the given
 	 * file is a directory, preventing the
 	 * ability to be overwritten.
@@ -71,9 +76,8 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Accessor method used to get a shallow
-	 * copy of all the colors in the current
-	 * palette.
+	 * Get a shallow copy of all the colors in
+	 * the current palette.
 	 * @return List of basetype Color
 	 * containing all of the colors in the
 	 * current palette.
@@ -83,8 +87,7 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Accessor method used to get the starting
-	 * color of the palette.
+	 * Get the starting color of the palette.
 	 * @return Color object that the palette is
 	 * based around.
 	 */
@@ -93,10 +96,9 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Accessor method used to get a shallow copy
-	 * of the Color at the specified index.
+	 * Get a shallow copy of the Color at the specified index.
 	 * @param index integer value containing the
-	 * Color object to return
+	 *                 Color object to return
 	 * @return Color object corresponding to the
 	 * specified index.
 	 */
@@ -105,8 +107,7 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Accessor method used to get the number of
-	 * Colors being used in the palette.
+	 * Get the number of Colors being used in the palette.
 	 * @return integer value containing the number
 	 * of Colors being used in the palette.
 	 */
@@ -115,27 +116,15 @@ public abstract class Palette {
 	}
 
 	/**
-	 * Mutator method designed to add a new Color
-	 * reference to the instance's list of Colors.
+	 * Add a new Color reference to the instance's
+	 * list of Colors.
 	 * @param color Color reference to add to the
-	 * instance's list of Colors
+	 *                 instance's list of Colors
 	 */
 	protected void addColor(Color color) {
 		this.colors.add(color);
 	}
 
-	/**
-	 * Overridden equals(..) method from Object
-	 * class. Used to check whether the current
-	 * instance and the given reference have the
-	 * same palette in the same order of colors.
-	 * @param obj Object reference with actual
-	 * type Palette
-	 * @return boolean value determining if the
-	 * current instance and the given reference
-	 * have the same palette in the same order
-	 * of colors.
-	 */
 	@Override
 	public boolean equals(Object obj) {
 		if(!(obj instanceof Palette)) {
@@ -156,13 +145,6 @@ public abstract class Palette {
 		return true;
 	}
 
-	/**
-	 * Overridden toString() method from Object class. When
-	 * invoked, information about each color being used
-	 * and the quantity is returned as a String.
-	 * @return String object containing information about
-	 * the colors being used.
-	 */
 	@Override
 	public String toString() {
 		return String.format("%s\n"

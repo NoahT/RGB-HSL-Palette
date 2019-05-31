@@ -3,8 +3,11 @@ package rgb_hsl.color;
 /**
  * Subclass of Color.
  * Uses integer values for red, blue and green
- * and compensates for any remainder.
+ * and compensates for any remainder. Elements in RGB
+ * space are ordered triplets, where each component is
+ * on the range [0, 255], inclusive.
  * @author Noah Teshima
+ * @since 1.0.0
  */
 public class RGBColor extends Color {
 	private int red,
@@ -13,46 +16,50 @@ public class RGBColor extends Color {
 	
 	/**
 	 * Default constructor. When invoked, the current
-	 * instance is set to have a shade of black.
+	 * instance is set to have a shade of black, with the
+	 * RGB triplet of (0, 0, 0).
 	 */
 	public RGBColor() {
 		this(0, 0, 0);
 	}
 	
 	/**
-	 * Copy constructor used to create an RGB color with the same
-	 * values as the given reference.
+	 * Create an RGB color with the same values as the given reference.
+	 * Specifically, the RGB element will have the same ordered triplet
+	 * as the given reference. However, a deep copy is created, so two
+	 * distinct references will have the same position in RGB space.
 	 * @param color RGBColor reference containing the RGB values to
-	 * copy.
+	 *                 copy.
 	 */
 	public RGBColor(RGBColor color) {
 		this(color.getRed(), color.getGreen(), color.getBlue());
 	}
 
 	/**
-	 * Constructor used to set the red, green, and
-	 * blue values of the current color to their
-	 * corresponding values.
+	 * Set the red, green, and blue values of the current
+	 * color to their corresponding values. Elements in RGB
+	 * space are ordered triplets, where each component is
+	 * on the range [0, 255], inclusive.
 	 * @param red integer value containing the amount
-	 * of red
+	 *               of red
 	 * @param green integer value containing the amount
-	 * of green
+	 *                 of green
 	 * @param blue integer value containing the amount
-	 * of blue
+	 *                of blue
 	 */
 	public RGBColor(int red, int green, int blue) {
 		this.setColor(red, green, blue);
 	}
 
 	/**
-	 * Mutator method designed to set the amount of red, green,
-	 * and blue
+	 * Set the amount of red, green, and blue. This sets
+	 * the position of the given instance in RGB space.
 	 * @param red integer value containing the amount
-	 * of red
+	 *               of red
 	 * @param green integer value containing the amount
-	 * of green
+	 *                 of green
 	 * @param blue integer value containing the amount
-	 * of blue
+	 *                of blue
 	 */
 	@Override
 	public void setColor(double red, double green, double blue) {
@@ -62,8 +69,9 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Accessor method used to get the amount of red in the current
-	 * RGB color.
+	 * Get the amount of red in the current RGB color.
+	 * The amount of red is guaranteed to be on the range
+	 * [0, 255], inclusive.
 	 * @return integer value containing the amount of
 	 * red.
 	 */
@@ -74,9 +82,9 @@ public class RGBColor extends Color {
 	/**
 	 * Mutator method used to set the new amount of
 	 * red in the current RGB Color, on the range
-	 * from 0 to 255, inclusive.
+	 * [0, 255], inclusive.
 	 * @param red integer value containing the new
-	 * amount of red.
+	 *               amount of red.
 	 */
 	public void setRed(int red) {
 		//keep in range if less than 0
@@ -85,8 +93,9 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Accessor method sed to get the amount of green
-	 * in the current RGB color.
+	 * Get the amount of green in the current RGB color.
+	 * The amount of green is guaranteed to be on the
+	 * range [0, 255], inclusive.
 	 * @return integer value containing the amount of
 	 * green.
 	 */
@@ -95,19 +104,19 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Mutator method used to set the new amount of
-	 * green in the current RGB Color, on the range
-	 * from 0 to 255, inclusive.
+	 * Set the new amount of green in the current RGB Color,
+	 * on the range [0, 255], inclusive.
 	 * @param green integer value containing the new
-	 * amount of green.
+	 *                 amount of green.
 	 */
 	public void setGreen(int green) {
 		this.green = (green < 0) ? 0 : green % 256;
 	}
 
 	/**
-	 * Accessor method used to get the amount of
-	 * blue in the current RGB color.
+	 * Get the amount of blue in the current RGB color.
+	 * The amount of blue is guaranteed to be on the range
+	 * [0, 255], inclusive.
 	 * @return integer value containing the amount of
 	 * blue.
 	 */
@@ -116,19 +125,17 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Mutator method used to set the new amount of
-	 * blue in the current RGB Color, on the range
-	 * from 0 to 255, inclusive.
+	 * Set the new amount of blue in the current RGB Color,
+	 * on the range [0, 255], inclusive.
 	 * @param blue integer value containing the new
-	 * amount of blue.
+	 *                amount of blue.
 	 */
 	public void setBlue(int blue) {
 		this.blue = (blue < 0) ? 0 : blue % 256;
 	}
 
 	/**
-	 * Helper method designed to get the
-	 * hue corresponding to the current RGB values.
+	 * Get the hue corresponding to the current RGB values.
 	 *
 	 * Algorithm for hue is based on the Chromaticity
 	 * plane, which takes the additive primary colors
@@ -163,13 +170,12 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Helper method used to get the saturation
-	 * of the current RGB color. In a HSL color space,
-	 * the saturation can be described as the quantity of hue
-	 * when put on a spectrum of pure grey to the current
-	 * hue. In other words, a high saturation indicates a
-	 * stronger color, while a low saturation indicates a gray
-	 * color.
+	 * Get the saturation of the current RGB color.
+	 * In a HSL color space, the saturation can be described
+	 * as the quantity of hue when put on a spectrum of
+	 * pure grey to the current hue. In other words,
+	 * a high saturation indicates a stronger color,
+	 * while a low saturation indicates a gray color.
 	 *
 	 * @return double value containing the
 	 * amount of saturation for the current
@@ -191,11 +197,11 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Helper method used to get the lightness
-	 * of the current RGB color. The formula for lightness
-	 * conversion from an RGB color space is to get the maximum
-	 * and minimum interpolated values and average them.
-	 * Because of this, lightness will also be interpolated in
+	 * Get the lightness of the current RGB color.
+	 * The formula for lightness conversion from an RGB
+	 * color space is to get the maximum and minimum
+	 * interpolated values and average them. Because of
+	 * this, lightness will also be interpolated in
 	 * the range of 0 to 1, inclusive.
 	 *
 	 * @return double value containing the
@@ -207,9 +213,10 @@ public class RGBColor extends Color {
 	}
 
 	/**
-	 * Accessor method used to get the corresponding
-	 * color in an HSL color space. This is a linear transformation
-	 * between RGB and HSL color spaces.
+	 * Get the corresponding color in an HSL color space.
+	 * This is a linear transformation between RGB and HSL
+	 * color spaces, and represents the equivalent form
+	 * in HSL space.
 	 * @return HSLColor object that corresponds to the
 	 * current instance's RGB values.
 	 */
@@ -219,43 +226,39 @@ public class RGBColor extends Color {
 	}
 	
 	/**
-	 * Private accessor method used to get
-	 * the amount of red on the range of
-	 * 0 to 1, inclusive.
+	 * Get the amount of red on the range
+	 * [0, 1], inclusive.
 	 * @return the amount of red interpolated
-	 * on range 0 to 1, inclusive.
+	 * on range [0, 1], inclusive.
 	 */
 	private double getInterpolatedRed() {
 		return ((double) this.getRed() / 255);
 	}
 	
 	/**
-	 * Private accessor method used to get
-	 * the amount of green on the range of
-	 * 0 to 1, inclusive.
+	 * Get the amount of green on the range
+	 * [0, 1], inclusive.
 	 * @return the amount of green interpolated
-	 * on range 0 to 1, inclusive.
+	 * on range [0, 1], inclusive.
 	 */
 	private double getInterpolatedGreen() {
 		return ((double) this.getGreen() / 255);
 	}
 	
 	/**
-	 * Private accessor method used to get
-	 * the amount of blue on the range of
-	 * 0 to 1, inclusive.
+	 * Get the amount of blue on the range of
+	 * [0, 1], inclusive.
 	 * @return the amount of blue interpolated
-	 * on range 0 to 1, inclusive.
+	 * on range [0, 1], inclusive.
 	 */
 	private double getInterpolatedBlue() {
 		return ((double) this.getBlue() / 255);
 	}
 	
 	/**
-	 * Private accessor used to get the maximum
-	 * interpolated RGB value.
+	 * Get the maximum interpolated RGB value.
 	 * @return double value containing the maximum
-	 * interpolated RGB value on range 0 to 1,
+	 * interpolated RGB value on range [0, 1],
 	 * inclusive.
 	 */
 	private double getMax() {
@@ -271,10 +274,9 @@ public class RGBColor extends Color {
 	}
 	
 	/**
-	 * Private accessor method used to get the minimum
-	 * interpolated RGB value.
+	 * Get the minimum interpolated RGB value.
 	 * @return double value containing the minimum
-	 * interpolated RGB value on range 0 to 1, inclusive.
+	 * interpolated RGB value on range [0, 1], inclusive.
 	 */
 	private double getMin() {
 		double returnValue = this.getInterpolatedRed();

@@ -1,21 +1,21 @@
 package rgb_hsl.color;
 
 /**
- * Color interface implemented
- * for different ways of determining Color.
- * This interface is purposely left as a marker interface
- * since HSL and RGB color spaces have no universal
- * characteristics, aside from the fact that
- * both describe color.
+ * Class Color represents the root class for different
+ * color spaces. Color spaces represent different ways
+ * of describing Color. HSL and RGB color spaces are
+ * isomorphic to three dimensional real space. As such,
+ * this class should only serve as a root for color spaces
+ * that are also isomorphic to three dimensional space.
  * @author Noah Teshima
- *
+ * @since 1.0.0
  */
 public abstract class Color {
     /**
-     * Method stub designed to set the current color, given
-     * three distinct elements. Both RGB and HSL spaces are isomorphic
-     * to three dimensional real space, so three distinct elements are
-     * needed in either cases to define a color.
+     * Set the current color, given three distinct elements.
+     * Both RGB and HSL spaces are isomorphic to three dimensional
+     * real space, so three distinct elements are needed in either
+     * cases to define a color.
      * @param elementA double value containing elementA
      * @param elementB double value containing elementB
      * @param elementC double value containing elementC

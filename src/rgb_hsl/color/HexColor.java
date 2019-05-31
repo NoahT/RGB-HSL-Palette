@@ -3,7 +3,7 @@ package rgb_hsl.color;
 import java.util.InputMismatchException;
 
 /**
- * Subclass of abstract class RGBColor.
+ * Subclass of class RGBColor.
  * Uses integer values for red, blue and green
  * and compensates for any remainder. Hex color codes
  * are given in the following form
@@ -12,6 +12,7 @@ import java.util.InputMismatchException;
  * range of [00-ff], for the amount of red, green, and blue,
  * respectively.
  * @author Noah Teshima
+ * @since 1.0.0
  */
 public class HexColor extends RGBColor {
 	private String hexCode;
@@ -32,8 +33,7 @@ public class HexColor extends RGBColor {
 		private static String PATTERN_ONE = "^[\\s]*[#]?([\\da-fA-F]{3}|[\\da-fA-F]{6})[\\s]*$";
 
 		/**
-		 * Helper method used to remove unnecessary characters from the
-		 * given hex code.
+		 * Remove unnecessary characters from the given hex code.
 		 * @param hexString String reference containing the hex color code.
 		 * @return String object containing the hex color code with unnecessary
 		 * characters removed.
@@ -45,10 +45,9 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to determine whether the given String
-		 * is a parseable hex color code.
+		 * Determine whether the given String is a parseable hex color code.
 		 * @param str String reference containing a potential hex color
-		 *            code.
+		 *                  code.
 		 * @return boolean value determining whether the given reference is
 		 * in a parseable format for a hex color code.
 		 */
@@ -57,8 +56,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the amount of red
-		 * in the given hex color code in base ten.
+		 * Get the amount of red in the given hex color code in base ten.
 		 * @param hexString String reference containing the hex color code.
 		 * @return int value containing the amount of red in base ten.
 		 * @throws InputMismatchException if the given String reference is not a valid hex color code.
@@ -72,8 +70,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the amount of green
-		 * in the given hex color code in base ten.
+		 * Get the amount of green in the given hex color code in base ten.
 		 * @param hexString String reference containing the hex color code.
 		 * @return int value containing the amount of green in base ten.
 		 * @throws InputMismatchException if the given String reference is not a valid hex color code.
@@ -87,8 +84,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the amount of blue
-		 * in the given hex color code in base ten.
+		 * Get the amount of blue in the given hex color code in base ten.
 		 * @param hexString String reference containing the hex color code.
 		 * @return int value containing the amount of blue in base ten.
 		 * @throws InputMismatchException if the given String reference is not a valid hex color code.
@@ -102,8 +98,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the hex code for the
-		 * amount of red.
+		 * Get the hex code for the amount of red.
 		 * @param hexString String reference containing the hex color code.
 		 * @return int value containing the amount of red in base 16.
 		 * @precondition hexString is a valid hex color code.
@@ -115,8 +110,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the hex code for the
-		 * amount of green.
+		 * Get the hex code for the amount of green.
 		 * @param hexString String reference containing the hex color code.
 		 * @return String value containing the amount of green in base 16.
 		 * @precondition hexString is a valid hex color code.
@@ -128,8 +122,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the hex code for the
-		 * amount of blue.
+		 * Get the hex code for the amount of blue.
 		 * @param hexString String reference containing the hex color code.
 		 * @return String value containing the amount of blue in base 16.
 		 * @precondition hexString is a valid hex color code.
@@ -141,8 +134,7 @@ public class HexColor extends RGBColor {
 		}
 
 		/**
-		 * Accessor method used to get the base ten counterpart
-		 * of the given String
+		 * Get the base ten counterpart of the given String
 		 * @param baseSixteen String reference containing a valid
 		 *                    base sixteen String.
 		 * @return int value containing the given reference's base ten
@@ -167,33 +159,31 @@ public class HexColor extends RGBColor {
 	}
 
 	/**
-	 * Copy constructor used to create a HexColor with the same
-	 * values as the given reference.
+	 * Create a HexColor with the same values as the given RGBColor reference.
 	 * @param color RGBColor reference containing the RGB values to
-	 * copy.
+	 *                 copy.
 	 */
 	public HexColor(RGBColor color) {
 		this(color.getRed(), color.getGreen(), color.getBlue());
 	}
 	
 	/**
-	 * Constructor used to set the hex color given
-	 * the amount of red, green, and blue for the
-	 * current instance.
+	 * Set the hex color given the amount of red, green,
+	 * and blue for the current instance.
 	 * @param red integer value containing the amount
-	 * of red
+	 *               of red
 	 * @param green integer value containing the amount
-	 * of green
+	 *                 of green
 	 * @param blue integer value containing the amount
-	 * of blue
+	 *                of blue
 	 */
 	public HexColor(int red, int green, int blue) {
 		this.setColor(red, green, blue);
 	}
 
 	/**
-	 * Constructor used to set the hex color given
-	 * a String reference containing a hex color code.
+	 * Set the hex color given a String reference containing
+	 * a hex color code.
 	 * @param hexCode String reference containing a hex color code.
 	 * @throws InputMismatchException If the given hex String is not parseable.
 	 */
@@ -202,8 +192,7 @@ public class HexColor extends RGBColor {
 	}
 
 	/**
-	 * Private mutator method designed to set the
-	 * instance's hexCode to its corresponding
+	 * Set the instance's hexCode to its corresponding
 	 * color. Uses hexadecimal format in order
 	 * to properly convert the amount of red,
 	 * blue, and green for the current color.
@@ -227,18 +216,29 @@ public class HexColor extends RGBColor {
 	}
 
 	/**
-	 * Accessor method used to get the hex color ocde
-	 * associated with the current instance.
+	 * Get the hex color code associated with the current instance.
+	 * All returned hex color codes are given in the following form
+	 * <b>#rrggbb</b>
+	 * where <b>rr</b>, <b>gg</b>, and <b>bb</b> represent hexadecimal values on the
+	 * range of [00-ff], inclusive, for the amount of red, green, and blue,
+	 * respectively.
 	 * @return String object containing the current hex color
-	 * cde.
+	 * code.
 	 */
 	public String getHexCode() {
 		return this.hexCode;
 	}
 
 	/**
-	 * Mutator method designed to set the current HexColor instance
-	 * with a hex String.
+	 * Set the current HexColor instance with a hex String.
+	 * All valid hex color codes are given in either of the
+	 * following forms
+	 * <b>#rrggbb</b>, or <b>#rgb</b>
+	 * where <b>rr</b>, <b>gg</b>, and <b>bb</b> represent hexadecimal values on the
+	 * range of [00-ff], inclusive, for the amount of red, green, and blue,
+	 * respectively. In the case where shorthand hex color codes is used,
+	 * <b>r</b>, <b>g</b>, and <b>b</b> collectively repesent both the
+	 * first and second order of magnitude in base 16.
 	 * @param hexCode String reference containing a valid hexCode.
 	 * @throws InputMismatchException If the given hex String is not parseable.
 	 */

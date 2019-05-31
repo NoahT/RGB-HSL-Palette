@@ -5,7 +5,7 @@ package rgb_hsl.color;
  * Used for describing a color by hue, saturation,
  * and lightness.
  * @author Noah Teshima
- *
+ * @since 1.0.0
  */
 public class HSLColor extends Color {
 	private int hue;
@@ -23,24 +23,24 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Copy constructor used to create an HSL color with the same
-	 * values as the given reference.
+	 * Create an HSL color with the same values as the given
+	 * HSLColor reference.
 	 * @param color HSLColor reference containing the HSL values to
-	 * copy.
+	 *                 copy.
 	 */
 	public HSLColor(HSLColor color) {
 		this(color.getHue(), color.getSaturation(), color.getLightness());
 	}
 	
 	/**
-	 * Constructor used to set the hue, saturation, and
-	 * lightness values to their corresponding parameters.
+	 * Set the hue, saturation, and lightness values to their
+	 * corresponding parameters.
 	 * @param hue integer value containing the degree of
-	 * the new hue.
+	 *               the new hue.
 	 * @param saturation double value containing the percentage
-	 * of saturation.
+	 *                      of saturation.
 	 * @param lightness double value containing the percentage
-	 * of lightness.
+	 *                     of lightness.
 	 */
 	public HSLColor(int hue, double saturation, double lightness) {
 		this.setHue(hue);
@@ -49,14 +49,13 @@ public class HSLColor extends Color {
 	}
 
 	/**
-	 * Mutator method designed to set the amount of hue, saturation,
-	 * and lightness.
+	 * Sets the amount of hue, saturation, and lightness.
 	 * @param hue integer value containing the amount
-	 * of hue.
+	 *               of hue.
 	 * @param saturation integer value containing the amount
-	 * of saturation.
+	 *                      of saturation.
 	 * @param lightness integer value containing the amount
-	 * of lightness.
+	 *                     of lightness.
 	 */
 	@Override
 	public void setColor(double hue, double saturation, double lightness) {
@@ -66,19 +65,22 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Mutator method used to set the hue of the
-	 * current instance. Takes values in range
-	 * of 0 to 360 degrees, inclusive.
+	 * Set the hue of the current instance.
+	 * Takes values in range [0, 360], inclusive.
+	 * However, in the instance where the hue is not
+	 * in the given range, modulus will be used in
+	 * order to ensure the resulting hue will be
+	 * in the range [0, 360].
 	 * @param hue integer value containing the degree
-	 * of the new hue.
+	 *               of the new hue.
 	 */
 	public void setHue(int hue) {
 		this.hue = (hue < 0) ? 360 + (hue % 360) : hue % 360;
 	}
 	
 	/**
-	 * Accessor method used to get the hue of the
-	 * current instance.
+	 * Get the hue of the current instance. The resulting
+	 * hue is guaranteed to be in the range [0, 360].
 	 * @return integer value containing the degree
 	 * of hue.
 	 */
@@ -87,21 +89,25 @@ public class HSLColor extends Color {
 	}
 
 	/**
-	 * Mutator method used to increment the hue
-	 * of the current color by the specified amount.
+	 * Increment the hue of the current color
+	 * by the specified amount. If a negative
+	 * value is specified, the hue is decremented
+	 * instead.
 	 * @param degrees integer value containing the
-	 * number of degrees to increment the hue by.
+	 *                   number of degrees to increment or decrement
+	 *                   the hue by.
 	 */
 	public void incrementHue(int degrees) {
 		this.setHue(this.getHue() + degrees);
 	}
 	
 	/**
-	 * Mutator method used to set the saturation
-	 * of the current instance on a range from
-	 * 0 to 1, inclusive.
+	 * Set the saturation of the current instance
+	 * on the range [0, 1], inclusive. If the given
+	 * saturation is outside of these bounds, it is
+	 * set to the closest boundary on this range.
 	 * @param saturation double value containing the
-	 * new saturation.
+	 *                      new saturation.
 	 */
 	public void setSaturation(double saturation) {
 		if(saturation < 0) {
@@ -114,8 +120,9 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Accessor method used to get the saturation of
-	 * the current instance.
+	 * Get the saturation of the current instance.
+	 * The saturation is guaranteed to always be on
+	 * the range [0, 1], inclusive.
 	 * @return double value containing the current
 	 * saturation
 	 */
@@ -124,11 +131,12 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Mutator method used to set the lightness
-	 * of the current instance on a range from
-	 * 0 to 1, inclusive.
+	 * Set the lightness of the current instance
+	 * on the range [0 to 1], inclusive. If the given
+	 * lightness is outside of these bounds, it is
+	 * set to the closest boundary on this range.
 	 * @param lightness double value containing the
-	 * new lightness.
+	 *                     new lightness.
 	 */
 	public void setLightness(double lightness) {
 		if(lightness < 0) {
@@ -142,7 +150,9 @@ public class HSLColor extends Color {
 	
 	/**
 	 * Accessor method used to get the lightness
-	 * of the current instance.
+	 * of the current instance. The saturation is
+	 * guaranteed to always be on the range [0, 1],
+	 * inclusive.
 	 * @return double value containing the current
 	 * lightness
 	 */
@@ -151,8 +161,8 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Helper method used to get the amount of
-	 * red in the HSL color.
+	 * Get the amount of red in the HSL color. The amount
+	 * of red is guaranteed to be on the range [0, 255] inclusive.
 	 * 
 	 * @return integer value containing the amount of
 	 * red in the current HSL color.
@@ -180,8 +190,8 @@ public class HSLColor extends Color {
 	}
 
 	/**
-	 * Helper method used to get the amount of
-	 * green in the HSL color.
+	 * Get the amount of green in the HSL color. The amount
+	 * of green is guaranteed to be on the range [0, 255] inclusive.
 	 * 
 	 * @return integer value containing the amount of
 	 * green in the current HSL color.
@@ -208,8 +218,8 @@ public class HSLColor extends Color {
 	}
 
 	/**
-	 * Helper method used to get the amount of
-	 * blue in the HSL color.
+	 * Get the amount of blue in the HSL color. The amount
+	 * of blue is guaranteed to be on the range [0, 255] inclusive.
 	 * 
 	 * @return integer value containing the amount of
 	 * blue in the current HSL color.
@@ -238,9 +248,9 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Accessor method used to get the corresponding
-	 * color in an RGB color space. This is a linear transformation
-	 * between RGB and HSL color spaces.
+	 * Get the corresponding color in an RGB color space.
+	 * This is a linear transformation between RGB and HSL color spaces,
+	 * and represents the equivalent form in RGB space.
 	 * @return RGBColor object that corresponds to the
 	 * current instance's HSL values.
 	 */
@@ -249,9 +259,8 @@ public class HSLColor extends Color {
 	}
 	
 	/**
-	 * Accessor method used to get the converison
-	 * for an HSL to an RGB color space. The math
-	 * conversion can be done with a 3x3 matrix
+	 * Get the conversion for an HSL to an RGB color space.
+	 * The math conversion can be done with a 3x3 matrix
 	 * transformation. Information about the
 	 * implemented algorithm can be found here:
 	 * <a href="http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/">
@@ -312,14 +321,6 @@ public class HSLColor extends Color {
 		&& this.getLightness() == colorObj.getLightness());
 	}
 	
-	/**
-	 * Overridden toString() method from Color class.
-	 * When invoked, the hue, saturation, and lightness
-	 * values are returned as a String object.
-	 * 
-	 * @return String object containing the instance's
-	 * hue, saturation, and lightness values.
-	 */
 	@Override
 	public String toString() {
 		return String.format("HSL (%d, %.2f, %.2f)",

@@ -4,12 +4,12 @@ import rgb_hsl.color.Color;
 import rgb_hsl.color.HSLColor;
 
 /**
- * Palette sublass used to generate a monochromatic
+ * Palette subclass used to generate a monochromatic
  * color palette. A monochromatic color
  * palette takes any color and uses
  * colors with lighter or darker shades.
  * @author Noah Teshima
- *
+ * @since 1.0.0
  */
 public class MonoChromaticPalette extends Palette {
 	private static final int DEFAULT_AMOUNT = 1;
@@ -20,19 +20,19 @@ public class MonoChromaticPalette extends Palette {
 	 * list of colors is instantiated and adds the given
 	 * color.
 	 * @param color Color reference used to create a new
-	 * color palette
+	 *                 color palette
 	 */
 	public MonoChromaticPalette(Color color) {
 		this(color, DEFAULT_AMOUNT);
 	}
 
 	/**
-	 * Constructor used to set a monochromatic color palette
-	 * given the number of values and offset of each value.
+	 * Set a monochromatic color palette given the number
+	 * of values and offset of each value.
 	 * @param color Color reference used to create a new color
-	 * palette
+	 *                 palette
 	 * @param amount integer value containing the number of values
-	 * to use
+	 *                  to use
 	 */
 	public MonoChromaticPalette(Color color, int amount) {
 		super(color);
@@ -41,10 +41,9 @@ public class MonoChromaticPalette extends Palette {
 	}
 
 	/**
-	 * Private mutator method designed to set
-	 * the specified amount of colors to add.
+	 * Set the specified amount of colors to add.
 	 * @param amount integer value containing
-	 * the amount of values to add.
+	 *                  the amount of values to add.
 	 */
 	private void setAmount(int amount) {
 		this.amount = (amount < 0) ? 0 : amount;
