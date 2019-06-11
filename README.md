@@ -9,6 +9,9 @@ currently lacks support for colors outside of RGB space, this library intends to
 ## Usage
 RGB-HSL Palette currently has a list of available releases (since v1.0.0) that is available [here](https://github.com/NoahT/RGB-HSL-Palette/releases). Included in every release is relevant documentation, as well as an executable .jar file which should be added to the build path of any targeted project.
 
+## Documentation
+Each release contains relevant Javadocs for available functionality. Aside from this, example code can be found on the wiki [here](https://github.com/NoahT/RGB-HSL-Palette/wiki).
+
 ## Contributing
 Contributions are always encouraged. Please review the guidelines [here](https://github.com/NoahT/RGB-HSL-Palette/blob/master/CONTRIBUTING.md).
 
